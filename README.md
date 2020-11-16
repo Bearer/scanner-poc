@@ -102,7 +102,7 @@ $ GITHUB_TOKEN=secret ~/.bearer/bearer-cli github --base "https://my.github.inst
 $ GITLAB_TOKEN=secret ~/.bearer/bearer-cli gitlab mygitlaborg/myrepo
 ```
 
-You will need a Gitlab API token with `read_api` scope.
+You will need a Gitlab API token with `read_api` scope. You can generate your key here: https://gitlab.com/-/profile/personal_access_tokens
 
 ### Self Hosted GitLab
 
