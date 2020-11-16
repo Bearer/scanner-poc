@@ -79,7 +79,7 @@ The executable will download the list of repositories, run the scan and generate
 $ GITHUB_TOKEN=secret ~/.bearer/bearer-cli github mygithuborg/myrepo
 ```
 
-You can generate your `repo` only GitHub API key here: https://github.com/settings/tokens
+You will need a GitHub API token with `repo` scope. You can generate your key here: https://github.com/settings/tokens
 
 **Note** for ssh github access you might need to update your global git configuration in `~/.gitconfig` file by adding the following line:
 
