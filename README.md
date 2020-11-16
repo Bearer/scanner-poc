@@ -17,13 +17,9 @@ The Scanner will go over all your files and look for patterns in your code that 
 We provide a script that will download the binary to `~/.bearer/bearer-cli`
 
 ```console
-$ curl "https://raw.githubusercontent.com/Bearer/scanner-poc/main/download.sh" | bash -s
-Downloading to ~/.bearer/bearer-cli
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100 20.8M  100 20.8M    0     0  20.4M      0  0:00:01  0:00:01 --:--:-- 20.4M
-Please visit https://github.com/Bearer/scanner-poc/blob/main/README.md#how-to-use-it for the binary usage
+curl "https://raw.githubusercontent.com/Bearer/scanner-poc/main/download.sh" | bash -s
 ```
+
 **To update binary** simply run `./download.sh` script again. It will overwrite the existing `~/.bearer/bearer-cli` file and set the executable flags.
 
 ## Binary usage
@@ -35,10 +31,10 @@ In all cases the binary execution will generate the ZIP report in your working d
 Run the binary passing the list of repository folders
 
 ```console
-$ ~/.bearer/bearer-cli local <path_to_source_code_root_folder_1> <path_to_source_code_root_folder_2>
-$ ls
-bearer-cli.zip
+~/.bearer/bearer-cli local <path_to_source_code_root_folder_1> <path_to_source_code_root_folder_2>
 ```
+
+This will generate an archive.
 
 #### Paranoid mode
 
@@ -47,11 +43,16 @@ The following method is less practical to use and has more limitations;
 However, it can help you build an isolated environment to run the scanner.
 
 ```console
-$ docker run -it --rm \
-	-w "$PWD" -v "$PWD:$PWD" \
-	buildpack-deps sh -ec \
-	'curl -sL "https://raw.githubusercontent.com/Bearer/scanner-poc/main/download.sh" | bash -s && ~/.bearer/bearer-cli local <path_to_source_code_root_folder_1> <path_to_source_code_root_folder_2>'
+docker run -it --rm \
+-w "$PWD" -v "$PWD:$PWD" \
+buildpack-deps sh -ec \
+'curl -sL "https://raw.githubusercontent.com/Bearer/scanner-poc/main/download.sh" | bash -s && ~/.bearer/bearer-cli local <path_to_source_code_root_folder_1> <path_to_source_code_root_folder_2>'
 [...]
+```
+
+You can then see your archive
+
+```console
 $ ls bearer_report_*.zip
 bearer_report_2020-11-12-144452.zip
 ```
@@ -76,7 +77,7 @@ The executable will download the list of repositories, run the scan and generate
 #### Github
 
 ```console
-$ GITHUB_TOKEN=secret ~/.bearer/bearer-cli github mygithuborg/myrepo
+GITHUB_TOKEN=secret ~/.bearer/bearer-cli github mygithuborg/myrepo
 ```
 
 You will need a GitHub API token with `repo` scope. You can generate your key here: https://github.com/settings/tokens
@@ -93,13 +94,13 @@ You will need a GitHub API token with `repo` scope. You can generate your key he
 Same as Option 2 except that you are have a Self Hosted version of GitHub
 
 ```console
-$ GITHUB_TOKEN=secret ~/.bearer/bearer-cli github --base "https://my.github.instance" mygithuborg/myrepo
+GITHUB_TOKEN=secret ~/.bearer/bearer-cli github --base "https://my.github.instance" mygithuborg/myrepo
 ```
 
 #### Gitlab
 
 ```console
-$ GITLAB_TOKEN=secret ~/.bearer/bearer-cli gitlab mygitlaborg/myrepo
+GITLAB_TOKEN=secret ~/.bearer/bearer-cli gitlab mygitlaborg/myrepo
 ```
 
 You will need a Gitlab API token with `read_api` scope. You can generate your key here: https://gitlab.com/-/profile/personal_access_tokens
@@ -107,7 +108,7 @@ You will need a Gitlab API token with `read_api` scope. You can generate your ke
 ### Self Hosted GitLab
 
 ```console
-$ GITLAB_TOKEN=secret ~/.bearer/bearer-cli gitlab --base "https://my.gitlab.instance" mygitluborg/myrepo
+GITLAB_TOKEN=secret ~/.bearer/bearer-cli gitlab --base "https://my.gitlab.instance" mygitluborg/myrepo
 ```
 
 ### Upload the script back to Bearer
