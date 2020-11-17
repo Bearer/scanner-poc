@@ -1,6 +1,7 @@
 #!/bin/sh
 
-URL_BASE="https://bearer-hub-backend-production.s3.eu-west-3.amazonaws.com"
+env=${ENV:="production"}
+URL_BASE="https://bearer-cli-binaries.s3.eu-west-1.amazonaws.com"
 BINARY_NAME="bearer-cli-latest"
 blue="\033[34m"
 reset="\033[0m"
@@ -17,10 +18,10 @@ notice() { warn "$blue$1$reset" ;}
 if [ $os = 'darwin' ]; then
   case $arch in
   "i386")
-    DOWNLOAD_URL="$URL_BASE/$os/386/bin/$BINARY_NAME"
+    DOWNLOAD_URL="$URL_BASE/$os/$env/386/bin/$BINARY_NAME"
   ;;
   "x86_64")
-    DOWNLOAD_URL="$URL_BASE/$os/amd64/bin/$BINARY_NAME"
+    DOWNLOAD_URL="$URL_BASE/$os/$env/amd64/bin/$BINARY_NAME"
   ;;
   *)
     notice "Your system ($os => $arch) is not yet supported"
@@ -33,13 +34,13 @@ if [ $os = 'linux' ]; then
   arch="$(uname -m | awk '{print tolower($0)}')"
   case $arch in
   "i386")
-    DOWNLOAD_URL="$URL_BASE/$os/386/bin/$BINARY_NAME"
+    DOWNLOAD_URL="$URL_BASE/$os/$env/386/bin/$BINARY_NAME"
   ;;
   "x86_64")
-    DOWNLOAD_URL="$URL_BASE/$os/amd64/bin/$BINARY_NAME"
+    DOWNLOAD_URL="$URL_BASE/$os/$env/amd64/bin/$BINARY_NAME"
   ;;
   "aarch64")
-    DOWNLOAD_URL="$URL_BASE/$os/arm64/bin/$BINARY_NAME"
+    DOWNLOAD_URL="$URL_BASE/$os/$env/arm64/bin/$BINARY_NAME"
   ;;
   *)
     notice "Your system ($os => $arch) is not yet supported"
